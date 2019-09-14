@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://kit.fontawesome.com/6671ec9365.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style/main.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Budget Display -->
+
+      <div class="display">
+        <div class="display-budget">
+          <div class="display-icon">
+            <i class="fas fa-money-check-alt fa-3x"></i>
+          </div>
+          <i class="fas fa-dollar-sign fa-2x"></i>
+          <span class="display-budget-value">0</span>
+        </div>
+        <div class="display-expense">
+          <div class="display-icon">
+            <i class="far fa-minus-square fa-3x"></i>
+          </div>
+          <i class="fas fa-dollar-sign fa-2x"></i>
+          <span class="display-expense-value">0</span>
+        </div>
+        <div class="display-balance">
+          <div class="display-icon">
+            <i class="fas fa-equals fa-3x"></i>
+          </div>
+          <i class="fas fa-dollar-sign fa-2x"></i>
+          <span class="display-balance-value">0</span>
+        </div>
+      </div>
+    </div>
+    <!-- Budget Input & Info -->
+
+    <div class="input-info">
+      <!-- Expense Input -->
+      <div class="expense-input">
+        <!-- Expense Input > Expense Button -->
+        <div class="expense-btn">
+          <button
+            type="button"
+            class="btn btn-outline-warning active"
+            id="income"
+          >
+            Income
+          </button>
+          <button type="button" class="btn btn-outline-warning" id="groceries">
+            Groceries
+          </button>
+          <button type="button" class="btn btn-outline-warning" id="dining">
+            Dining
+          </button>
+          <button type="button" class="btn btn-outline-warning" id="bills">
+            Bills
+          </button>
+          <button type="button" class="btn btn-outline-warning" id="smoking">
+            Smoking
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-warning"
+            id="maintenance"
+          >
+            Maintenance
+          </button>
+        </div>
+
+        <!-- Expense Input > Expense form -->
+        <form class="form">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control expense-input"
+              id="form-input"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn text-capitalize expense-submit"
+            id="form-submit"
+          >
+            add expense
+          </button>
+        </form>
+      </div>
+      <!-- Expense History -->
+      <div class="expense-history">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="expense-list"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="js/app2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+@import "config";
+
+* {
+  color: $primary-color;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(43, 42, 83);
+}
+
+.display {
+  height: 15%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 3px solid $primary-color;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+
+  .fa-dollar-sign {
+    margin-right: 1rem;
+  }
+
+  span {
+    font-size: 3rem;
+  }
+
+  .display-balance-value {
+    &.warn {
+      color: red;
+    }
+  }
+}
+
+.input-info {
+  height: 80%;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 1rem;
+}
+
+.expense-input {
+  .expense-btn {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-areas:
+      "income groceries dining"
+      "bills smoking maintenance";
+    grid-gap: 1rem;
+    #income {
+      grid-area: income;
+      color: green;
+      border-color: green;
+    }
+    #groceries {
+      grid-area: groceries;
+    }
+    #dining {
+      grid-area: dining;
+    }
+    #bills {
+      grid-area: bills;
+    }
+    #smoking {
+      grid-area: smoking;
+    }
+    #maintenance {
+      grid-area: maintenance;
+    }
+
+    .btn {
+      &.active {
+        background: $secondary-color;
+        color: #000;
+      }
+    }
+  }
+
+  .form {
+    margin-top: 7rem;
+    padding: 0 1rem;
+    text-align: center;
+
+    button {
+      margin-top: 2rem;
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.expense-history {
+  .table {
+    text-align: center;
+  }
+  .fa-trash-alt {
+    cursor: pointer;
+  }
+  .list-btn {
+    width: 178px;
+    height: 38px;
+  }
+}

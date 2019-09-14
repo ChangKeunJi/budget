@@ -1,0 +1,124 @@
+* {
+  color: #faec31;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #2b2a53;
+}
+
+.display {
+  height: 15%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  border: 3px solid #faec31;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.display .fa-dollar-sign {
+  margin-right: 1rem;
+}
+
+.display span {
+  font-size: 3rem;
+}
+
+.display .display-balance-value.warn {
+  color: red;
+}
+
+.input-info {
+  height: 80%;
+  margin-top: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+  grid-gap: 1rem;
+}
+
+.expense-input .expense-btn {
+  margin-top: 5rem;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "income groceries dining" "bills smoking maintenance";
+  grid-gap: 1rem;
+}
+
+.expense-input .expense-btn #income {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: income;
+  color: green;
+  border-color: green;
+}
+
+.expense-input .expense-btn #groceries {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: groceries;
+}
+
+.expense-input .expense-btn #dining {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: dining;
+}
+
+.expense-input .expense-btn #bills {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: bills;
+}
+
+.expense-input .expense-btn #smoking {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: smoking;
+}
+
+.expense-input .expense-btn #maintenance {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: maintenance;
+}
+
+.expense-input .expense-btn .btn.active {
+  background: #ffc107;
+  color: #000;
+}
+
+.expense-input .form {
+  margin-top: 7rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.expense-input .form button {
+  margin-top: 2rem;
+  color: #faec31;
+  border-color: #faec31;
+}
+
+.expense-history .table {
+  text-align: center;
+}
+
+.expense-history .fa-trash-alt {
+  cursor: pointer;
+}
+
+.expense-history .list-btn {
+  width: 178px;
+  height: 38px;
+}
+/*# sourceMappingURL=main.css.map */
