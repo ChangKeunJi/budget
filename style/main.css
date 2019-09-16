@@ -11,114 +11,183 @@ body {
   background: #2b2a53;
 }
 
-.display {
-  height: 15%;
+body .budget {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
-  border: 3px solid #faec31;
-  border-radius: 10px;
-  margin-top: 1rem;
-  padding: 1rem;
-  text-align: center;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  height: 100vh;
 }
 
-.display .fa-dollar-sign {
-  margin-right: 1rem;
+body .budget .info-and-form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 2fr;
+      grid-template-rows: 1fr 2fr;
 }
 
-.display span {
-  font-size: 3rem;
+.info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.display .display-balance-value.warn {
+.info .display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  border: 1px solid #faec31;
+  border-radius: 1rem;
+  margin: 0 1rem;
+  padding: 2.5rem 0;
+}
+
+.info .display .display-balance-value.warning {
   color: red;
 }
 
-.input-info {
-  height: 80%;
-  margin-top: 2rem;
+.info .display span {
+  font-size: 2rem;
+}
+
+.form-bottom {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 2fr;
-      grid-template-columns: 1fr 2fr;
+  -ms-grid-rows: 1fr 2fr;
+      grid-template-rows: 1fr 2fr;
+}
+
+.form-bottom .budget-form {
+  padding: 1rem 10rem;
+  margin: 1rem;
+  text-align: center;
+  padding-top: 1rem;
+  border: 1px solid #faec31;
+  border-radius: 1rem;
+}
+
+.form-bottom .budget-form button {
+  color: #faec31;
+  border-color: #faec31;
+  width: 40%;
+  height: 70%;
+}
+
+.expense-form {
+  display: 100%;
+}
+
+.expense-form form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+}
+
+.expense-form form .expense-btn {
+  margin: 1rem 1rem;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "rent groceries dining" "bills smoking maintenance";
   grid-gap: 1rem;
 }
 
-.expense-input .expense-btn {
-  margin-top: 5rem;
-  display: -ms-grid;
-  display: grid;
-      grid-template-areas: "income groceries dining" "bills smoking maintenance";
-  grid-gap: 1rem;
-}
-
-.expense-input .expense-btn #income {
+.expense-form form .expense-btn #rent {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  grid-area: income;
-  color: green;
-  border-color: green;
+  grid-area: rent;
 }
 
-.expense-input .expense-btn #groceries {
+.expense-form form .expense-btn #groceries {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: groceries;
 }
 
-.expense-input .expense-btn #dining {
+.expense-form form .expense-btn #dining {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: dining;
 }
 
-.expense-input .expense-btn #bills {
+.expense-form form .expense-btn #bills {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: bills;
 }
 
-.expense-input .expense-btn #smoking {
+.expense-form form .expense-btn #smoking {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: smoking;
 }
 
-.expense-input .expense-btn #maintenance {
+.expense-form form .expense-btn #maintenance {
   -ms-grid-row: 2;
   -ms-grid-column: 3;
   grid-area: maintenance;
 }
 
-.expense-input .expense-btn .btn.active {
+.expense-form form .expense-btn .btn.active {
   background: #ffc107;
   color: #000;
 }
 
-.expense-input .form {
-  margin-top: 7rem;
-  padding: 0 1rem;
+.expense-form form .form-group {
+  padding: 1rem 10rem;
+  margin: 1rem;
   text-align: center;
+  padding-top: 1rem;
+  border: 1px solid #faec31;
+  border-radius: 1rem;
 }
 
-.expense-input .form button {
-  margin-top: 2rem;
+.expense-form form .form-group button {
   color: #faec31;
   border-color: #faec31;
+  width: 40%;
+  height: 70%;
+  margin-top: 1rem;
 }
 
-.expense-history .table {
+.table {
   text-align: center;
 }
 
-.expense-history .fa-trash-alt {
+.table td {
+  vertical-align: middle;
+}
+
+.table button {
+  width: 150px;
+  height: 50px;
+  text-transform: uppercase;
+}
+
+.table .fa-trash-alt {
   cursor: pointer;
 }
 
-.expense-history .list-btn {
-  width: 178px;
-  height: 38px;
+@media screen and (max-width: 1150px) {
+  body .budget {
+    display: inline;
+  }
 }
 /*# sourceMappingURL=main.css.map */

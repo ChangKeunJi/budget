@@ -1,4 +1,5 @@
-@import "config";
+$primary-color: rgb(250, 236, 49);
+$secondary-color: #ffc107;
 
 * {
   color: $primary-color;
@@ -10,100 +11,143 @@ body {
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: rgb(43, 42, 83);
-}
-
-.display {
-  height: 15%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 3px solid $primary-color;
-  border-radius: 10px;
-  margin-top: 1rem;
-  padding: 1rem;
-  text-align: center;
-
-  .fa-dollar-sign {
-    margin-right: 1rem;
-  }
-
-  span {
-    font-size: 3rem;
-  }
-
-  .display-balance-value {
-    &.warn {
-      color: red;
-    }
-  }
-}
-
-.input-info {
-  height: 80%;
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 1rem;
-}
-
-.expense-input {
-  .expense-btn {
-    margin-top: 5rem;
+  .budget {
     display: grid;
-    grid-template-areas:
-      "income groceries dining"
-      "bills smoking maintenance";
-    grid-gap: 1rem;
-    #income {
-      grid-area: income;
-      color: green;
-      border-color: green;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    height: 100vh;
+    .info-and-form {
+      display: grid;
+      grid-template-rows: 1fr 2fr;
     }
-    #groceries {
-      grid-area: groceries;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border: 1px solid $primary-color;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    padding: 2.5rem 0;
+    .display-balance-value {
+      &.warning {
+        color: red;
+      }
     }
-    #dining {
-      grid-area: dining;
+    span {
+      font-size: 2rem;
     }
-    #bills {
-      grid-area: bills;
+  }
+}
+
+.form-bottom {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+
+  .budget-form {
+    padding: 1rem 10rem;
+    margin: 1rem;
+    text-align: center;
+    padding-top: 1rem;
+    border: 1px solid $primary-color;
+    border-radius: 1rem;
+    button {
+      color: $primary-color;
+      border-color: $primary-color;
+      width: 40%;
+      height: 70%;
     }
-    #smoking {
-      grid-area: smoking;
-    }
-    #maintenance {
-      grid-area: maintenance;
+  }
+}
+
+.expense-form {
+  display: 100%;
+  form {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+    .expense-btn {
+      margin: 1rem 1rem;
+      display: grid;
+      grid-template-areas:
+        "rent groceries dining"
+        "bills smoking maintenance";
+      grid-gap: 1rem;
+      #rent {
+        grid-area: rent;
+      }
+      #groceries {
+        grid-area: groceries;
+      }
+      #dining {
+        grid-area: dining;
+      }
+      #bills {
+        grid-area: bills;
+      }
+      #smoking {
+        grid-area: smoking;
+      }
+      #maintenance {
+        grid-area: maintenance;
+      }
+      .btn {
+        &.active {
+          background: $secondary-color;
+          color: #000;
+        }
+      }
     }
 
-    .btn {
-      &.active {
-        background: $secondary-color;
-        color: #000;
+    .form-group {
+      // margin-top: 2rem;
+      padding: 1rem 10rem;
+      margin: 1rem;
+      text-align: center;
+      padding-top: 1rem;
+      border: 1px solid $primary-color;
+      border-radius: 1rem;
+      button {
+        color: $primary-color;
+        border-color: $primary-color;
+        width: 40%;
+        height: 70%;
+        margin-top: 1rem;
       }
     }
   }
-
-  .form {
-    margin-top: 7rem;
-    padding: 0 1rem;
-    text-align: center;
-
-    button {
-      margin-top: 2rem;
-      color: $primary-color;
-      border-color: $primary-color;
-    }
-  }
 }
 
-.expense-history {
-  .table {
-    text-align: center;
+.table {
+  text-align: center;
+
+  td {
+    vertical-align: middle;
   }
+
+  button {
+    width: 150px;
+    height: 50px;
+    text-transform: uppercase;
+  }
+
   .fa-trash-alt {
     cursor: pointer;
   }
-  .list-btn {
-    width: 178px;
-    height: 38px;
+}
+
+@media screen and (max-width: 1150px) {
+  body {
+    .budget {
+      display: inline;
+    }
   }
 }

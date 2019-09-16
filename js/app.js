@@ -1,5 +1,3 @@
-//! Money Class
-
 class List {
   constructor(type, amount, id) {
     this.type = type;
@@ -8,101 +6,85 @@ class List {
   }
 }
 
-//! UI Class
-
 class UI {
   constructor() {
-    this.displayBudget = document.querySelector(".display-budget-value");
-    this.displayExpense = document.querySelector(".display-expense-value");
-    this.displayBalance = document.querySelector(".display-balance-value");
-    this.buttons = document.querySelectorAll(".btn-outline-warning");
-    this.formInput = document.getElementById("form-input");
-    this.formSubmit = document.getElementById("form-submit");
-    this.expenseList = document.getElementById("expense-list");
-    this.incomeBtn = document.getElementById("income");
+    this.list = document.getElementById("expense-list");
     this.deleteBtn = document.querySelector(".fa-trash-alt");
-    this.income = JSON.parse(localStorage.getItem("income"))
-      ? JSON.parse(localStorage.getItem("income"))
-      : 0;
+    this.expenseForm = document.querySelector("#expense-form");
+    this.buttons = document.querySelectorAll(".btn-outline-warning");
+    this.expenseInput = document.getElementById("expense-input");
+    this.budgetForm = document.getElementById("budget-form");
+    this.budgetInput = document.getElementById("budget-input");
+    this.budgetDisplay = document.querySelector(".display-budget-value");
+    this.expenseDisplay = document.querySelector(".display-expense-value");
+    this.balanceDisplay = document.querySelector(".display-balance-value");
+    this.activeBtn = document.querySelector(".active");
+    this.resetBtn = document.querySelector("#reset");
+    this.budget = 0;
     this.expense = 0;
     this.balance = 0;
-    this.itemList = [];
+    this.expenseArr = [];
   }
 
-  submitForm() {
-    let value = this.formInput.value;
-    this.activeBtn = document.querySelector(".active");
-
-    if (value === "" || value < 0) {
-      alert("Are You Kidding me?");
-      this.formInput.value = "";
+  submitBudget() {
+    let value = this.budgetInput.value;
+    if (value < 0 || value === "") {
+      alert("Wrong Input");
     } else {
-      this.showDisplay();
-      this.formInput.value = "";
+      this.budgetDisplay.textContent = value;
+      this.budgetInput.value = "";
     }
+    this.budget = value;
+    this.displayBalance();
   }
 
-  showDisplay() {
-    this.totalBudgetAndExpense();
-    this.totalBalance();
+  addArr() {
+    let value = parseInt(this.expenseInput.value);
+    let type = this.activeBtn.id.toUpperCase();
+    // Add to Expense Arr
 
-    let lists = JSON.parse(localStorage.getItem("lists"));
-
-    console.log(lists);
-
-    this.displayBudget.textContent = this.income;
-    this.displayExpense.textContent = this.expense;
-    this.displayBalance.textContent = this.balance;
+    const list = new List(type, value, new Date().getTime());
+    this.expenseArr.push(list);
+    console.log(list);
   }
 
-  totalBudgetAndExpense() {
-    let value = this.formInput.value;
-    this.activeBtn = document.querySelector(".active");
-
-    if (this.activeBtn.id === this.incomeBtn.id) {
-      this.income = value;
-      Store.setIncome(this.income);
-    } else {
-      this.totalExpense();
-    }
-  }
-
-  totalExpense() {
-    let value = this.formInput.value;
-    this.activeBtn = document.querySelector(".active");
-    value = parseInt(value, 10);
-    let income = this.income;
-
-    if (value !== "" && value > 0) {
-      let list = new List(this.activeBtn.id, value, new Date().getTime());
-      this.itemList.push(list);
-      Store.addList(list);
-      this.addToList(this.itemList, this.expenseList);
-    }
-
+  submitExpense() {
+    let value = parseInt(this.expenseInput.value);
+    let type = this.activeBtn.id.toUpperCase();
     let total = 0;
 
-    total = this.itemList.reduce((a, b) => {
+    if (value <= 0 || value === "") {
+      alert("Wrong Input");
+    } else {
+      this.addArr();
+      this.subSubmitExpense();
+    }
+
+    this.displayBalance();
+  }
+
+  subSubmitExpense() {
+    let value = parseInt(this.expenseInput.value);
+    let type = this.activeBtn.id.toUpperCase();
+    let total = 0;
+
+    total = this.expenseArr.reduce((a, b) => {
       a += b.amount;
       return a;
     }, 0);
 
-    this.expense = total;
+    this.expenseDisplay.textContent = total;
+
+    this.expenseInput.value = "";
+
+    this.addHistory(this.expenseArr, this.list);
+
+    this.displayBalance();
   }
 
-  totalBalance() {
-    this.balance = this.income - this.expense;
-    if (this.balance < 0) {
-      this.displayBalance.classList.add("warn");
-    } else {
-      this.displayBalance.classList.remove("warn");
-    }
-    this.balance = this.income - this.expense;
-  }
-
-  addToList(list = [], expenseList) {
-    expenseList.innerHTML = list
-      .map((item, i) => {
+  addHistory(arr, list) {
+    list.innerHTML = arr
+      .map(item => {
         return `
         <tr>
         <td>
@@ -118,79 +100,40 @@ class UI {
       .join("");
   }
 
-  deleteList(el) {
-    let target = el.parentElement;
-    if (el.classList.contains("fa-trash-alt")) {
-      el.parentElement.parentElement.remove();
-      let id = parseInt(el.id);
-      let targetList = this.itemList.filter(item => item.id === id);
-      let tempExpense = targetList[0].amount;
-      this.expense -= tempExpense;
-      let tempList = this.itemList.filter(item => item.id !== id);
-      this.itemList = tempList;
-      this.showDisplay();
-      Store.removeList(id);
-    }
+  deleteList(target) {
+    let id = parseInt(target.id);
+    let tempList = this.expenseArr.filter(list => list.id !== id);
+    this.expenseArr = tempList;
   }
-}
 
-//! Store Class
+  displayBalance() {
+    let sum = this.budgetDisplay.innerHTML - this.expenseDisplay.innerHTML;
 
-class Store {
-  static getList() {
-    let lists;
-
-    if (localStorage.getItem("lists") === null) {
-      lists = [];
+    if (sum < 0) {
+      this.balanceDisplay.classList.add("warning");
     } else {
-      lists = JSON.parse(localStorage.getItem("lists"));
+      this.balanceDisplay.classList.remove("warning");
     }
 
-    return lists;
-  }
-
-  static addList(list) {
-    const lists = this.getList();
-    lists.push(list);
-    localStorage.setItem("lists", JSON.stringify(lists));
-  }
-
-  static removeList(id) {
-    const lists = this.getList();
-
-    lists.forEach((item, index) => {
-      if (item.id == id) {
-        lists.splice(index, 1);
-      }
-    });
-
-    localStorage.setItem("lists", JSON.stringify(lists));
-  }
-
-  static setIncome(num) {
-    // let income;
-
-    // if (localStorage.getItem("income") === null) {
-    //   income = 0;
-    // } else {
-    //   income = JSON.parse(localStorage.getItem("income"));
-    // }
-
-    localStorage.setItem("income", num);
+    this.balanceDisplay.textContent = sum;
   }
 }
 
-//! Event Listener
+// Event Listner
 
 const eventListener = () => {
-  const form = document.querySelector(".form");
-
+  const budgetForm = document.getElementById("budget-form");
+  const expenseForm = document.querySelector("#expense-form");
   const ui = new UI();
 
-  let tempList = JSON.parse(localStorage.getItem("lists"));
-  ui.addToList((tempList = []), ui.expenseList);
+  // Submit Budget
 
-  // Choosing Form Btn
+  budgetForm.addEventListener("submit", e => {
+    e.preventDefault();
+    ui.submitBudget();
+  });
+
+  // Select Expense Button
 
   ui.buttons.forEach(btn => {
     btn.addEventListener("click", e => {
@@ -201,17 +144,27 @@ const eventListener = () => {
     });
   });
 
-  // Submit Expense or Income
-  form.addEventListener("submit", e => {
-    ui.submitForm();
+  // Submit Expense
+
+  expenseForm.addEventListener("submit", e => {
     e.preventDefault();
-    console.log(ui.itemList);
+    // ui.addArr();
+    ui.submitExpense();
   });
 
   // Delete List
-  ui.expenseList.addEventListener("click", e => {
-    ui.deleteList(e.target);
-    console.log(ui.itemList);
+
+  ui.list.addEventListener("click", e => {
+    if (e.target.classList.contains("fa-trash-alt")) {
+      ui.deleteList(e.target);
+      ui.subSubmitExpense();
+    }
+  });
+
+  // Reset
+
+  ui.resetBtn.addEventListener("click", () => {
+    window.location.reload(true);
   });
 };
 
